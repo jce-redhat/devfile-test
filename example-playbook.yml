@@ -1,0 +1,12 @@
+---
+- name: Example playbook
+  hosts: localhost
+  gather_facts: true
+  become: false
+
+  tasks:
+    - name: Display dev space hostname
+      ansible.builtin.debug:
+        msg: 'Host name is {{ ansible_hostname }}'
+
+...
