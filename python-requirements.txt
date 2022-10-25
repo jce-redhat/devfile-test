@@ -1,0 +1,3 @@
+# TODO: later versions available on pypi.org but pip can't find them
+# when run in the workspace
+ansible==4.10.0

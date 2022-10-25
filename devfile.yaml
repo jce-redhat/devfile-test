@@ -1,0 +1,28 @@
+schemaVersion: 2.1.0
+metadata:
+  name: my-workspace
+components:
+  - name: workspace
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel8:3.1
+      volumeMounts:
+        - name: venv
+          path: /home/user/.venv
+      memoryLimit: 2G
+      mountSources: true
+  - name: venv
+    volume:
+      size: 1G
+commands:
+  - id: pip-install
+    exec:
+      component: workspace
+      commandLine: >
+        python3 -m venv ${HOME}/.venv
+        && source ${HOME}/.venv/bin/activate
+        && pip install --upgrade pip
+        && pip install -r python-requirements.txt
+      workingDir: ${PROJECT_SOURCE}
+      group:
+        kind: build
+        isDefault: false
